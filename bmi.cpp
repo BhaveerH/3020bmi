@@ -6,12 +6,17 @@ using namespace std;
 
 int ounces2pounds(int x)
 {
-    return(x*16);
+    return(x/16);			//changed * to /
 }
 
 int stones2pounds(int x)
 {
-    return(x*14);
+    return(x*14);			
+}
+
+int inches2feet(int x)
+{
+    return(x/12)			//added inch to feet function
 }
 
 double weight2kg(int stones, int pounds, int ounces)
@@ -21,7 +26,8 @@ double weight2kg(int stones, int pounds, int ounces)
 
 double height2metres(int feet, int inches)
 {
-    return(feet/3.82);
+
+    return(feet + inch2feet(inches))/3.28);		// 3.28 not 3.82 and added inch2feet function
 }
 
 char categorise(double kg, double metre)
@@ -29,13 +35,21 @@ char categorise(double kg, double metre)
     double bmi = kg*kg/metre;
     char cat;
     if (bmi<19)
+    {
         cat='A';
-    else if (bmi<=26)
+    }
+    else if ((bmi>=19) && (bmi<25))			//added restrictions
+    {
         cat='B';
-    else if (bmi<=300)
+    }
+    else if ((bmi>=25) && (bmi<30))			//added restrictions
+    {
         cat='C';
+    }
     else
+    {
         cat='D';
+    }
     return(cat);
 }
 
@@ -46,7 +60,6 @@ void process_data(char* input_file, char* output_file)
     string data;
     string person_id;
     int pounds, stones, ounces, feet, inches;
-    string spounds, sstones, sounces, sfeet, sinches;
     double kg, m;
     char cat;
 
@@ -55,71 +68,6 @@ void process_data(char* input_file, char* output_file)
     while (!f_in.eof())
     {
     	f_in >> person_id >> pounds >> stones >> ounces >> feet >> inches;
-    	
-    	spounds  = to_string(pounds);
-        sstones  = to_string(stones);
-        sounces  = to_string(ounces);
-        sfeet  = to_string(feet);
-        sinches  = to_string(inches);
-
-        for (int i = 0; i < spounds.length(); i++)
-        {
-
-            if (isdigit(spounds[i]) == false)
-            {
-
-                cout << "Pounds input in not a number" << endl;
-            }
-
-        }
-
-
-        for (int i = 0; i < sstones.length(); i++)
-        {
-
-            if (isdigit(sstones[i]) == false)
-            {
-
-                cout << "Stones input in not a number" << endl;
-            }
-
-        }
-
-
-        for (int i = 0; i < sounces.length(); i++)
-        {
-
-            if (isdigit(sounces[i]) == false)
-            {
-
-                cout << "Ounces input in not a number" << endl;
-            }
-
-        }
-
-
-        for (int i = 0; i < sfeet.length(); i++)
-        {
-
-            if (isdigit(sfeet[i]) == false)
-            {
-
-                cout << "Feet input in not a number" << endl;
-            }
-
-        }
-
-
-        for (int i = 0; i < sinches.length(); i++)
-        {
-
-            if (isdigit(sinches[i]) == false)
-            {
-
-                cout << "Inches input in not a number" << endl;
-            }
-
-        }
         kg=weight2kg(int(stones),int(pounds),int(ounces));
         m =height2metres(int(feet),int(inches));
         cat=categorise(kg,m);
