@@ -46,6 +46,7 @@ void process_data(char* input_file, char* output_file)
     string data;
     string person_id;
     int pounds, stones, ounces, feet, inches;
+    string spounds, sstones, sounces, sfeet, sinches;
     double kg, m;
     char cat;
 
@@ -54,6 +55,71 @@ void process_data(char* input_file, char* output_file)
     while (!f_in.eof())
     {
     	f_in >> person_id >> pounds >> stones >> ounces >> feet >> inches;
+    	
+    	spounds  = to_string(pounds);
+        sstones  = to_string(stones);
+        sounces  = to_string(ounces);
+        sfeet  = to_string(feet);
+        sinches  = to_string(inches);
+
+        for (int i = 0; i < spounds.length(); i++)
+        {
+
+            if (isdigit(spounds[i]) == false)
+            {
+
+                cout << "Pounds input in not a number" << endl;
+            }
+
+        }
+
+
+        for (int i = 0; i < sstones.length(); i++)
+        {
+
+            if (isdigit(sstones[i]) == false)
+            {
+
+                cout << "Stones input in not a number" << endl;
+            }
+
+        }
+
+
+        for (int i = 0; i < sounces.length(); i++)
+        {
+
+            if (isdigit(sounces[i]) == false)
+            {
+
+                cout << "Ounces input in not a number" << endl;
+            }
+
+        }
+
+
+        for (int i = 0; i < sfeet.length(); i++)
+        {
+
+            if (isdigit(sfeet[i]) == false)
+            {
+
+                cout << "Feet input in not a number" << endl;
+            }
+
+        }
+
+
+        for (int i = 0; i < sinches.length(); i++)
+        {
+
+            if (isdigit(sinches[i]) == false)
+            {
+
+                cout << "Inches input in not a number" << endl;
+            }
+
+        }
         kg=weight2kg(int(stones),int(pounds),int(ounces));
         m =height2metres(int(feet),int(inches));
         cat=categorise(kg,m);
